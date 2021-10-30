@@ -51,5 +51,32 @@ public class DBUtil {
             e.printStackTrace();
         }
     }
+    public static void add(Connection conn,String query, String name, String address) {
+        try (PreparedStatement preparedStatement = conn.prepareStatement(query)) {
+            preparedStatement.setString(1,name);
+            preparedStatement.setString(2,address);
+            preparedStatement.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
+    public static void edit(Connection connection, String query, String name, int id){
+        try(PreparedStatement preparedStatement = connection.prepareStatement(query)){
+
+            preparedStatement.setString(1,name);
+            preparedStatement.setInt(2,id);
+            preparedStatement.executeUpdate();
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+    }
+    public static void delete(Connection connection, String query, int id){
+        try(PreparedStatement preparedStatement = connection.prepareStatement(query)){
+            preparedStatement.setInt(1,id);
+            preparedStatement.executeUpdate();
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+    }
 }
